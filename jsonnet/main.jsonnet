@@ -81,6 +81,7 @@ local swaggerEditorServiceIngress = {
     'name': 'swagger-editor-service-ingress',
   },
   'spec': {
+    'ingressClassName': 'nginx',
     'rules': [
       {
         'host': 'swagger-editor.argocddemo.rdchris2911.local',
