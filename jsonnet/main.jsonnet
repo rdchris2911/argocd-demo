@@ -54,11 +54,32 @@ local swaggerEditorDeployment = {
   },
 };
 
+local swaggerEditorService = {
+  'apiVersion': 'v1',
+  'kind': 'Service',
+  'metadata': {
+    'name': 'swagger-editor-service',
+  },
+  'spec': {
+    'selector': {
+      'app.kubernetes.io/name': 'swagger-editor',
+    },
+    'ports': [
+      {
+        'protocol': 'TCP',
+        'port': 8080,
+        'targetPort': 8080,  // Can be omitted, and it will default to 'port'
+      },
+    ],
+  },
+};
+
 function() {
   'apiVersion': 'v1',
   'kind': 'List',
   'items': [
     appConfig,
     swaggerEditorDeployment,
+    swaggerEditorService,
   ],
 }
