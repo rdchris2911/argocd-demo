@@ -74,6 +74,37 @@ local swaggerEditorService = {
   },
 };
 
+local swaggerEditorServiceIngress = {
+  'apiVersion': 'networking.k8s.io/v1',
+  'kind': 'Ingress',
+  'metadata': {
+    'name': 'swagger-editor-service-ingress',
+  },
+  'spec': {
+    'rules': [
+      {
+        'host': 'swagger-editor.argocddemo.rdchris2911.local',
+        'http': {
+          'paths': [
+            {
+              'pathType': 'Prefix',
+              'path': '/',
+              'backend': {
+                'service': {
+                  'name': 'swagger-editor-service',
+                  'port': {
+                    'number': 8080,
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+};
+
 function() {
   'apiVersion': 'v1',
   'kind': 'List',
@@ -81,5 +112,6 @@ function() {
     appConfig,
     swaggerEditorDeployment,
     swaggerEditorService,
+    swaggerEditorServiceIngress,
   ],
 }
